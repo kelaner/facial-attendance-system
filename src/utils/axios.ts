@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from "axios";
 
 
-const axiosInstance = axios.create({baseURL: "http://101.200.210.137:8080"});
+const axiosInstance = axios.create({baseURL: process.env.NEXT_PUBLIC_API_URL});
 
 
 axiosInstance.interceptors.response.use(
@@ -11,9 +11,6 @@ axiosInstance.interceptors.response.use(
 
 axiosInstance.interceptors.request.use(req => {
 	req.headers[ "Content-Type" ] = "application/json"
-	req.baseURL = "http://101.200.210.137:8080"
-
-
 	return req;
 });
 
@@ -21,9 +18,7 @@ export default axiosInstance;
 
 export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
 	const [url, config] = Array.isArray(args) ? args : [args];
-
 	const res = await axiosInstance.get(url, {...config});
-
 	return res.data;
 };
 
