@@ -1,7 +1,7 @@
 import ClassView from "@/sections/class/view";
 
 export const metadata = {
-	title: '人脸检测考勤机系统',
+	title: '班级总览',
 };
 
 export default function ClassPage() {

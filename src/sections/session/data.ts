@@ -5,11 +5,35 @@ import useSWR from "swr";
 
 export function GetSessions() {
 
-	const {data, isLoading, error, mutate} = useSWR(`/sessions`, fetcher)
+	const {data, isLoading, error, mutate} = useSWR(`/sessions?populate=*`, fetcher,{
+		revalidateIfStale: false,
+		revalidateOnFocus: false,
+		revalidateOnReconnect: false
+	})
 
 	const memoizedValue = useMemo(
 		() => ( {
-			data: ( data?.data as { attributes: SessionType[ ], id: number }[] ) || null,
+			data: ( data?.data as { attributes: SessionType, id: number }[] ) || null,
+			isLoading: isLoading,
+			error: error,
+		} ),
+		[data, isLoading, error],
+	);
+
+	return {memoizedValue, mutate};
+}
+
+export function GetSessionByID(id: number) {
+
+	const {data, isLoading, error, mutate} = useSWR(`/sessions/${id}?populate=*`, fetcher,{
+		revalidateIfStale: false,
+		revalidateOnFocus: false,
+		revalidateOnReconnect: false
+	})
+
+	const memoizedValue = useMemo(
+		() => ( {
+			data: ( data?.data as { attributes: SessionType, id: number } ) || null,
 			isLoading: isLoading,
 			error: error,
 		} ),

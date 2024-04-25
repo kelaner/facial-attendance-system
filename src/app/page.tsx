@@ -1,5 +1,5 @@
 import DashboardLayout from "@/layouts/common/DashboardLayout";
-import HomeView from "@/sections/home/view";
+import SessionView from "@/sections/session/view";
 import React from "react";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 export default function Home() {
 	return (
 		<DashboardLayout>
-			<HomeView/>
+			<SessionView/>
 		</DashboardLayout>
 	);
 }

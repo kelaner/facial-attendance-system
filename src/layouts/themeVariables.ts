@@ -1,7 +1,7 @@
-import {styled} from "@mui/material/styles";
 import {createTheme} from "@mui/material";
-import {blue} from "@mui/material/colors";
 import MuiAppBar, {AppBarProps as MuiAppBarProps} from '@mui/material/AppBar';
+import {blue} from "@mui/material/colors";
+import {styled} from "@mui/material/styles";
 import {isMobile} from "react-device-detect";
 
 // 定义抽屉宽度
@@ -64,9 +64,9 @@ export const DrawerHeader = styled("div")(({theme}) => ( {
 // 创建自定义主题
 export const theme = createTheme({
 	palette: {
-		primary: blue, // 设置主题的主要颜色为teal色调
-		secondary: {
-			main: "#fff", // 设置主题的次要颜色为白色
+		primary: {
+			main: "#fff",
 		},
+		secondary: blue
 	},
 });

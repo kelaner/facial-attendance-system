@@ -1,7 +1,7 @@
 import SessionView from "@/sections/session/view";
 
 export const metadata = {
-	title: '人脸检测考勤机系统',
+	title: '考勤总览',
 };
 
 export default function SessionPage() {
