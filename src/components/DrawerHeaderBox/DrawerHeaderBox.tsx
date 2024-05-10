@@ -8,7 +8,10 @@ function DrawerHeaderBox() {
 
 	return (
 		<Stack direction={"row"}>
-			<Link href={"https://better-reward-e0437d61dc.strapiapp.com/admin/"}>
+			<Link
+				href={`${process.env.NEXT_PUBLIC_API_URL}/admin/`}
+				target="_blank"
+			>
 				<IconButton>
 					<StyledBadge
 						overlap="circular"
