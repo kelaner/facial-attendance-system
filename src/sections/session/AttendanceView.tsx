@@ -274,7 +274,7 @@ function AttendanceView() {
 						if (student && !completeStudents.includes(student.id)) {
 
 
-							if (( 1 - label.distance ) <= 0.5) {
+							if (label.distance > 0.5) {
 								enqueueSnackbar('人脸识别率偏低，请重新签到', {variant: "warning"})
 							} else {
 								completeStudents.push(student.id)
