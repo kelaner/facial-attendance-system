@@ -90,7 +90,7 @@ export default function PersistentDrawerLeft({children, role}: Props) {
 								<MenuIcon/>
 							</IconButton>
 
-							<Typography variant={"h6"}>
+							<Typography variant={"h6"} noWrap>
 								{pathName}
 							</Typography>
 

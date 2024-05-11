@@ -5,11 +5,13 @@ import useSWR from "swr";
 
 export function GetClasses() {
 
-	const {data, isLoading, error, mutate} = useSWR(`/classes?populate=*`, fetcher, {
-		revalidateIfStale: false,
-		revalidateOnFocus: false,
-		revalidateOnReconnect: false
-	})
+	const {data, isLoading, error, mutate} = useSWR(
+		`/classes?populate=*`,
+		fetcher, {
+			revalidateIfStale: false,
+			revalidateOnFocus: false,
+			revalidateOnReconnect: false
+		})
 
 	const memoizedValue = useMemo(
 		() => ( {
@@ -25,11 +27,13 @@ export function GetClasses() {
 
 export function GetClassByID(id: number) {
 
-	const {data, isLoading, error, mutate} = useSWR(`/classes/${id}?populate=*`, fetcher, {
-		revalidateIfStale: false,
-		revalidateOnFocus: false,
-		revalidateOnReconnect: false
-	})
+	const {data, isLoading, error, mutate} = useSWR(
+		`/classes/${id}?populate[students][populate][avatar]=*&populate[sessions]=*&populate[students][populate][avatars]=*`,
+		fetcher, {
+			revalidateIfStale: false,
+			revalidateOnFocus: false,
+			revalidateOnReconnect: false
+		})
 
 	const memoizedValue = useMemo(
 		() => ( {

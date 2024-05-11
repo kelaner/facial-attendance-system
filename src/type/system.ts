@@ -45,7 +45,22 @@ export interface SessionWithIDType extends SessionType {
 
 export interface StudentType {
 	name: string,
-	avatar: string,
+	avatar: {
+		data: {
+			id: number,
+			attributes: {
+				url: string
+			}
+		}
+	},
+	avatars: {
+		data: {
+			id: number,
+			attributes: {
+				url: string
+			}
+		}[]
+	},
 	uid: string,
 	gender?: "undefined" | "male" | "female",
 	classes?: {
