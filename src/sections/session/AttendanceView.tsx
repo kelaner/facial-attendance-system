@@ -440,7 +440,7 @@ function AttendanceView() {
 									<Avatar
 										sx={{mr: 1, width: 48, height: 48}}
 										variant="rounded"
-										src={`${process.env.NEXT_PUBLIC_API_URL}${student.attributes.avatar?.data.attributes.url}`}
+										src={`${student.attributes.avatar?.data.attributes.url}`}
 										alt={student.attributes.name}
 									/>
 								</ListItemAvatar>
