@@ -182,7 +182,7 @@ function AttendanceView() {
 				for (let i = 0; i < item.avatars.length; i++) {
 					const s = item.avatars[ i ];
 					// item.avatars.map(async (avatar) => {
-					const img = await faceApi.fetchImage(`${process.env.NEXT_PUBLIC_API_URL}${s}`)
+					const img = await faceApi.fetchImage(`${s}`)
 
 					//识别人脸的初始化参数
 					// const options = new faceApi.SsdMobilenetv1Options({minConfidence: 0.38})
@@ -380,7 +380,7 @@ function AttendanceView() {
 										<Avatar
 											sx={{mr: 1, width: 48, height: 48}}
 											variant="rounded"
-											src={`${process.env.NEXT_PUBLIC_API_URL}${student.attributes.avatar?.data.attributes.url}`}
+											src={`${student.attributes.avatar?.data.attributes.url}`}
 											alt={student.attributes.name}
 										/>
 									</ListItemAvatar>
