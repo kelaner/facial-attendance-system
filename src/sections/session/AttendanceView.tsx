@@ -249,7 +249,7 @@ function AttendanceView() {
 				// console.log("labeledFaceDescriptors", labeledFaceDescriptors)
 				if (labeledFaceDescriptors!.length > 0) {
 					//比对人脸特征数据
-					const faceMatcher = new faceApi.FaceMatcher(labeledFaceDescriptors)
+					const faceMatcher = new faceApi.FaceMatcher(labeledFaceDescriptors,)
 					const label = faceMatcher.findBestMatch(resizedDetection.descriptor)
 
 					//显示比对的结果
@@ -259,6 +259,7 @@ function AttendanceView() {
 						{label: `${studentFaceList.find(i => i.id.toString() === label.label)?.name}(${( ( 1 - label.distance ) * 100 ).toFixed(0)}%)`})
 					drawBox.draw(canvas)
 
+
 					//设置最大停留时间为2秒
 					setTimeout(() => {
 						canvas.getContext("2d")?.clearRect(0, 0, canvas.width, canvas.height);
@@ -266,23 +267,32 @@ function AttendanceView() {
 					}, 2000);
 
 					if (studentFaceList.some(i => i.id.toString() === label.label)) {
-						// 学生签到
-						const student = studentFaceList.find(i => i.id.toString() === label.label)
-						if (student && !completeStudents.includes(student.id)) {
-							completeStudents.push(student.id)
 
-							PutStudentInSessionByID(Number(session_id), student.id, completeStudents).then(res => {
-								if (res) {
-									mutateSession()
-									mutateClass()
-									enqueueSnackbar(`学生 ${student.name} 签到成功`, {
-										variant: "success",
-										anchorOrigin: {vertical: 'bottom', horizontal: 'right'}
-									})
-								}
-							})
+						if (label.distance > 0.45) {
+							enqueueSnackbar('人脸识别率偏低，请重新签到', {variant: "warning"})
+						} else {
+
+							// 学生签到
+							const student = studentFaceList.find(i => i.id.toString() === label.label)
+							if (student && !completeStudents.includes(student.id)) {
+								completeStudents.push(student.id)
+
+								PutStudentInSessionByID(Number(session_id), student.id, completeStudents).then(res => {
+									if (res) {
+										mutateSession()
+										mutateClass()
+										enqueueSnackbar(`学生 ${student.name} 签到成功`, {
+											variant: "success",
+											anchorOrigin: {vertical: 'bottom', horizontal: 'right'}
+										})
+									}
+								})
+
+							}
 
 						}
+
+
 					}
 
 				}
