@@ -145,13 +145,14 @@ function AttendanceView() {
 
 			console.log("error", err)
 
-			const video = cameraVideoRef.current;
-			if (video) {
-				video.src = "/video/face.mp4";
-				video.play().then();
-				video.width = 304
-				video.height = 504
-			}
+
+			// const video = cameraVideoRef.current;
+			// if (video) {
+			// 	video.src = "https://easychuan.cn/r/e95ck?t=v";
+			// 	video.play().then();
+			// 	video.width = 304
+			// 	video.height = 504
+			// }
 
 		});
 	}
