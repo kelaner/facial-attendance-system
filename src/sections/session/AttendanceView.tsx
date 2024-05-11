@@ -27,6 +27,11 @@ function AttendanceView() {
 	const [completeStudents, setCompleteStudents] = useState<number[]>([])
 	const [studentFaceList, setStudentFaceList] = useState<StudentAvatarParams[]>([])
 
+	const [drawerState, setDrawerState] = React.useState({
+		classStudent: false,
+		completeStudent: false,
+	});
+
 	const cameraVideoRef = useRef<HTMLVideoElement>(null);
 	const canvasDivRef = useRef<HTMLCanvasElement>(null);
 
@@ -289,10 +294,6 @@ function AttendanceView() {
 		setTimeout(() => onPlay());
 	}
 
-	const [drawerState, setDrawerState] = React.useState({
-		classStudent: false,
-		completeStudent: false,
-	});
 
 	const toggleDrawer = (anchor: string, open: boolean) =>
 		(event: React.KeyboardEvent | React.MouseEvent) => {
@@ -315,94 +316,92 @@ function AttendanceView() {
 	return (
 		<Container maxWidth={"xl"}>
 
-			<Stack
-				sx={{width: "100%", p: 0, minHeight: "72vh"}}
-				direction={"row"}
-				alignItems={"center"}
-				justifyContent={"center"}
-				justifyItems={"center"}
-			>
-				{/*	添加一个视频框，可以调取设备摄像头，如果没有，则调用public目录下的/video/face.mp4文件*/}
-				<video
-					autoPlay
-					loop
-					muted
-					// controls
-					width="720"
-					height="560"
-					id={"cameraVideo"}
-					onLoadedData={onPlay}
-					ref={cameraVideoRef}
-				/>
-
-				<canvas
-					ref={canvasDivRef}
-					id={"canvas"}
-					style={{
-						position: "absolute"
-					}}
-				/>
-			</Stack>
-
-			<Stack direction={"row"} justifyContent={"center"}>
-				<Button
-					variant="contained"
-					sx={{m: 2}}
-					onClick={toggleDrawer("classStudent", true)}
-				>{"学生列表"}</Button>
-				<Button
-					variant="contained"
-					sx={{m: 2}}
-					onClick={toggleDrawer("completeStudent", true)}
-				>{"已签到学生"}</Button>
-			</Stack>
-
-			<Drawer
-				anchor={"right"}
-				open={drawerState.classStudent}
-				onClose={toggleDrawer("classStudent", false)}
-			>
+			<Stack sx={{width: "100%", minWidth: "80vw"}} direction={"row"}>
 				<Stack
-					sx={{width: 250, pt: 4, px: 2}}
-					onClick={toggleDrawer("classStudent", false)}
-					onKeyDown={toggleDrawer("classStudent", false)}
+					sx={{width: "75%", p: 0, minHeight: "72vh"}}
+					direction={"row"}
+					alignItems={"center"}
+					justifyContent={"center"}
+					justifyItems={"center"}
 				>
+					{/*	添加一个视频框，可以调取设备摄像头，如果没有，则调用public目录下的/video/face.mp4文件*/}
+					<video
+						autoPlay
+						loop
+						muted
+						// controls
+						width="720"
+						height="560"
+						id={"cameraVideo"}
+						onLoadedData={onPlay}
+						ref={cameraVideoRef}
+					/>
+
+					<canvas
+						ref={canvasDivRef}
+						id={"canvas"}
+						style={{
+							position: "absolute",
+						}}
+					/>
+				</Stack>
+
+				<Stack sx={{width: "25%", p: 2,}}>
+
 					{/*	创建一个带学生头像的学生列表 */}
 					<List
-						subheader={<Typography sx={{whiteSpace: "nowrap", ml: 2, fontSize: 22}}>学生列表</Typography>}
-						sx={{width: '100%', bgcolor: 'background.paper'}}
+						subheader={<Typography sx={{whiteSpace: "nowrap", ml: 2, my: 1, fontSize: 22}}>学生列表</Typography>}
+						sx={{
+							width: '100%',
+							height: "70vh",
+							background: "linear-gradient(102deg, #F1F5FE 8.4%, #FEF8F1 83.36%)",
+							borderRadius: "10px",
+							minWidth: "166px"
+						}}
 					>
 
-						{ClassData?.attributes.students?.data.length === 0 &&
-                <ListItemText sx={{whiteSpace: "nowrap"}}>暂无学生</ListItemText>}
+						<Stack direction={"row"} justifyContent={"center"}>
+							<Button
+								variant="contained"
+								fullWidth
+								sx={{mx: 2, mb: 0.5}}
+								onClick={toggleDrawer("completeStudent", true)}
+							>{"查看已签到学生"}</Button>
+						</Stack>
+						<List sx={{width: '100%', maxHeight: "70vh", overflowY: "auto", borderRadius: "20px"}}>
+							{ClassData?.attributes.students?.data.length === 0 &&
+                  <ListItemText sx={{whiteSpace: "nowrap"}}>暂无学生</ListItemText>}
 
 
-						{ClassData?.attributes.students?.data.map(student => (
-							<ListItemButton key={student.id}>
-								<ListItemAvatar>
-									<Avatar
-										sx={{mr: 1, width: 48, height: 48}}
-										variant="rounded"
-										src={`${process.env.NEXT_PUBLIC_API_URL}${student.attributes.avatar?.data.attributes.url}`}
-										alt={student.attributes.name}
+							{ClassData?.attributes.students?.data.map(student => (
+								<ListItemButton key={student.id}>
+									<ListItemAvatar>
+										<Avatar
+											sx={{mr: 1, width: 48, height: 48}}
+											variant="rounded"
+											src={`${process.env.NEXT_PUBLIC_API_URL}${student.attributes.avatar?.data.attributes.url}`}
+											alt={student.attributes.name}
+										/>
+									</ListItemAvatar>
+
+									<ListItemText
+										primary={<Typography sx={{fontSize: 18}}>{student.attributes.name}</Typography>}
+										secondary={completeStudents.includes(student.id) ?
+											<Typography sx={{color: "green", fontSize: 15}}>已签到</Typography> :
+											<Typography sx={{color: "red", fontSize: 15}}>未签到</Typography>
+										}
+										sx={{whiteSpace: "nowrap"}}
 									/>
-								</ListItemAvatar>
+								</ListItemButton>
+							))}
 
-								<ListItemText
-									primary={<Typography sx={{fontSize: 18}}>{student.attributes.name}</Typography>}
-									secondary={completeStudents.includes(student.id) ?
-										<Typography sx={{color: "green", fontSize: 15}}>已签到</Typography> :
-										<Typography sx={{color: "red", fontSize: 15}}>未签到</Typography>
-									}
-									sx={{whiteSpace: "nowrap"}}
-								/>
-							</ListItemButton>
-						))}
+
+						</List>
 					</List>
 				</Stack>
 
+			</Stack>
 
-			</Drawer>
 
 			<Drawer
 				anchor={"right"}
