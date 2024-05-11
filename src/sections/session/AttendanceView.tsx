@@ -248,14 +248,14 @@ function AttendanceView() {
 				// console.log("labeledFaceDescriptors", labeledFaceDescriptors)
 				if (labeledFaceDescriptors!.length > 0) {
 					//比对人脸特征数据
-					const faceMatcher = new faceApi.FaceMatcher(labeledFaceDescriptors, 0.6)
+					const faceMatcher = new faceApi.FaceMatcher(labeledFaceDescriptors)
 					const label = faceMatcher.findBestMatch(resizedDetection.descriptor)
 
 					//显示比对的结果
 					const box = resizedDetection.detection.box
 					const drawBox = new faceApi.draw.DrawBox(
 						box,
-						{label: `${studentFaceList.find(i => i.id.toString() === label.label)?.name}(${( label.distance * 100 ).toFixed(0)}%)`})
+						{label: `${studentFaceList.find(i => i.id.toString() === label.label)?.name}(${( ( 1 - label.distance ) * 100 ).toFixed(0)}%)`})
 					drawBox.draw(canvas)
 
 					//设置最大停留时间为2秒
