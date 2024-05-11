@@ -268,13 +268,15 @@ function AttendanceView() {
 
 					if (studentFaceList.some(i => i.id.toString() === label.label)) {
 
-						if (label.distance > 0.45) {
-							enqueueSnackbar('人脸识别率偏低，请重新签到', {variant: "warning"})
-						} else {
 
-							// 学生签到
-							const student = studentFaceList.find(i => i.id.toString() === label.label)
-							if (student && !completeStudents.includes(student.id)) {
+						// 学生签到
+						const student = studentFaceList.find(i => i.id.toString() === label.label)
+						if (student && !completeStudents.includes(student.id)) {
+
+
+							if (label.distance > 0.45) {
+								enqueueSnackbar('人脸识别率偏低，请重新签到', {variant: "warning"})
+							} else {
 								completeStudents.push(student.id)
 
 								PutStudentInSessionByID(Number(session_id), student.id, completeStudents).then(res => {
