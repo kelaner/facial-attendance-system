@@ -186,7 +186,9 @@ function AttendanceView() {
 
 					//识别人脸的初始化参数
 					// const options = new faceApi.SsdMobilenetv1Options({minConfidence: 0.38})
-					const options = new faceApi.TinyFaceDetectorOptions()
+					const options = new faceApi.TinyFaceDetectorOptions({
+						scoreThreshold: 0.1
+					})
 
 					//扫描图片中人脸的轮廓数据
 					const detections = await faceApi.detectSingleFace(img, options).withFaceLandmarks().withFaceDescriptor()
@@ -228,7 +230,9 @@ function AttendanceView() {
 
 		const result = await faceApi.detectSingleFace(
 			video,
-			new faceApi.TinyFaceDetectorOptions(),
+			new faceApi.TinyFaceDetectorOptions({
+				scoreThreshold: 0.1
+			}),
 			// new faceApi.SsdMobilenetv1Options({minConfidence: 0.38})
 		)
 		.withFaceLandmarks()

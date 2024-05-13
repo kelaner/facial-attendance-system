@@ -222,6 +222,7 @@ function SessionView() {
 					disableMultipleRowSelection
 					hideFooterSelectedRowCount
 					getRowId={row => row.id}
+					sortModel={[{field: 'id', sort: 'asc'}]}
 					sx={{overflowY: "hidden"}}
 				/>
 
