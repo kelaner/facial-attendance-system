@@ -66,7 +66,7 @@ function SessionView() {
 	}, [SessionData])
 
 	const sessionColumns: GridColDef[] = [
-		{field: "id", headerName: 'ID', minWidth: 50, maxWidth: 50, align: "center", headerAlign: "center"},
+		{field: "id", headerName: 'ID', minWidth: 60, maxWidth: 60, align: "center", headerAlign: "center"},
 		{field: 'name', headerName: '考勤', flex: 2, minWidth: 100, align: "center", headerAlign: "center"},
 
 
