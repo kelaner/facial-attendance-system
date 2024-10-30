@@ -56,8 +56,8 @@ function AttendanceView() {
 					{
 						id: item.id,
 						name: item.attributes.name,
-						avatar: item.attributes.avatar.data.attributes.url,
-						avatars: item.attributes.avatars.data.map(i => i.attributes.url)
+						avatar: `${process.env.NEXT_PUBLIC_API_URL}${item.attributes.avatar.data.attributes.url}`,
+						avatars: `${process.env.NEXT_PUBLIC_API_URL}${item.attributes.avatars.data.map(i => i.attributes.url)}`
 					}
 				])
 			}
