@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### 项目简介
 
-## Getting Started
+一款基于 TensorFlow.js 封装人脸识别模型的考勤管理系统，旨在解决传统考勤方式中存在的效率低下、准确性不足等问题。通过先进的人脸识别算法，结合硬件设备和后台管理系统，实现对员工考勤的智能化管理，提升考勤管理的效率和准确性。
 
-First, run the development server:
+### 技术栈
+
+- **React**: 用于构建用户界面的 JavaScript 库。
+- **Next.js**: 用于构建服务器渲染和静态网站的框架。
+- **TypeScript**: 用于开发静态类型检查的 JavaScript 代码。
+- **face-api.js**: 基于 TensorFlow.js 的 JavaScript API，专门用于在浏览器和 Node.js 环境中进行人脸检测和人脸识别。
+- **Strapi**: 用于构建后端 API 的开源头less CMS。
+
+### 关键技术
+
+- **TensorFlow.js**: 用于机器学习和深度学习的 JavaScript 库，提供了神经网络的训练和推理功能。
+- **WebGL**: 用于在浏览器中进行高性能的图形渲染，加速 TensorFlow.js 的计算。
+- **Node.js**: 用于在服务器端运行 JavaScript 代码，支持与 TensorFlow.js 的集成。
+
+### 框架
+
+- **face-api.js**: 提供了人脸检测、人脸识别、表情识别等功能的高级 API。
+
+### 项目功能
+
+1. **人脸检测**:
+   - 检测图片中的人脸并标记出边框。
+   - 获取面部关键点、年龄、性别以及表情检测等信息。
+
+2. **人脸分析**:
+   - 分析人脸图片，获得人脸的复杂关键点信息。
+   - 对五官和脸部轮廓进行精确检测。
+
+3. **人脸搜索**:
+   - 将一张人脸与 N 张人脸进行比对，找出最相似的一张或多张人脸（1:N 人脸搜索）。
+
+4. **人脸库管理 API**:
+   - 按照 REST API 标准设计人脸库相关的 API 接口格式。
+   - 支持前端用户直接对数据库中的数据进行获取。
+   - 配置实体服务 API 与查询引擎 API，便于前端交互。
+
+5. **后端集成**:
+   - 使用 Strapi 作为后端，拓展 GraphQL API。
+   - 通过内容类型生成器创建数据结构并开始通过内容管理器添加数据后，自动创建具体的 API 接口信息。
+
+### 入门指南
+
+首先，运行开发服务器：
 
 ```bash
 npm run dev
-# or
+# 或者
 yarn dev
-# or
+# 或者
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+然后在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看结果。
