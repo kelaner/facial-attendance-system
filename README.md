@@ -41,6 +41,12 @@
 5. **后端集成**:
    - 使用 Strapi 作为后端，拓展 GraphQL API。
    - 通过内容类型生成器创建数据结构并开始通过内容管理器添加数据后，自动创建具体的 API 接口信息。
+  
+### 相关项目
+
+- **Strapi CMS 代码库**:
+  - 该项目的后端管理系统基于 Strapi 构建，代码库地址为：[GitHub - kelaner/attendance-ts-cms](https://github.com/kelaner/attendance-ts-cms)。
+  - 该代码库包含了 Strapi 的配置和管理后台的实现，支持项目的后端功能。
 
 ### 入门指南
 
